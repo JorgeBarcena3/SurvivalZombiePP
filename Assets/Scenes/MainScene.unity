@@ -137,6 +137,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 5b9252a80ec059341882bd68ffe5b8aa, type: 2}
+    - target: {fileID: -6057140222963153312, guid: cb32651cb2262bd40b771c1a42d7e6fc,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: cb32651cb2262bd40b771c1a42d7e6fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -379,6 +384,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ch01_nonPBR
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: db9265d1ce80cc6429743ce325677a3d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6cc3b976252e1dd42bd7399c2c48d2c5, type: 2}
+    - target: {fileID: -6057140222963153312, guid: db9265d1ce80cc6429743ce325677a3d,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: db9265d1ce80cc6429743ce325677a3d,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 5b88745568df23e4e989748ceea525a6, type: 3}
+    - target: {fileID: -6057140222963153312, guid: db9265d1ce80cc6429743ce325677a3d,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: db9265d1ce80cc6429743ce325677a3d,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: db9265d1ce80cc6429743ce325677a3d,
         type: 3}
