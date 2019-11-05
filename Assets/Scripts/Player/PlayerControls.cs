@@ -35,16 +35,17 @@ public class PlayerControls : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        speed *= 100;
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Input.GetJoystickNames();
         //Controles de movimiento con mando
-        rb.AddForce(-Vector3.right * -Input.GetAxis(ControllerAxis.LHorizontal) * speed * Time.deltaTime, ForceMode.Acceleration);
-        rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * speed * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddForce(-Vector3.right * -Input.GetAxis(ControllerAxis.LHorizontal) * speed * 50 * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * speed * 50 * Time.deltaTime, ForceMode.Acceleration);
 
         float angle = Mathf.Atan2(Input.GetAxis(ControllerAxis.RVertical), Input.GetAxis(ControllerAxis.RHorizontal)) * Mathf.Rad2Deg;
         rb.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
