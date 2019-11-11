@@ -1,13 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manager de los controles del mando 
+/// </summary>
 public static class ControllerAxis
 {
     public static string LHorizontal = "Horizontal";
     public static string LVertical = "Vertical";
     public static string RHorizontal = "Mouse X";
     public static string RVertical = "Mouse Y";
+    public static string Disparo = "Right Trigger";
+    public static string Correr = "Left Trigger";
 
 
 }
@@ -44,24 +50,54 @@ public class PlayerControls : MonoBehaviour
     {
         // Input.GetJoystickNames();
         //Controles de movimiento con mando
-        rb.AddForce(-Vector3.right * -Input.GetAxis(ControllerAxis.LHorizontal) * speed * 50 * Time.deltaTime, ForceMode.Acceleration);
-        rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * speed * 50 * Time.deltaTime, ForceMode.Acceleration);
+
+        float currentSpeed = speed;
+
+        //Detectamos si esta corriendo o no
+        if (Input.GetAxis(ControllerAxis.Correr) > 0)
+        {
+            currentSpeed *= 2;
+        }
+
+        setSpeedOfAnim(currentSpeed);
+
+        rb.AddForce(-Vector3.right * -Input.GetAxis(ControllerAxis.LHorizontal) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
 
         float angle = Mathf.Atan2(Input.GetAxis(ControllerAxis.RVertical), Input.GetAxis(ControllerAxis.RHorizontal)) * Mathf.Rad2Deg;
         rb.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
 
-
-        //Controles de movimiento con teclado -- Solo Debug
-        if (Input.GetKey(KeyCode.W))
-        { rb.AddForce(Vector3.forward * speed * Time.deltaTime, ForceMode.Impulse); }
-        if (Input.GetKey(KeyCode.S))
-        { rb.AddForce(-Vector3.forward * speed * Time.deltaTime, ForceMode.Impulse); }
-        if (Input.GetKey(KeyCode.A))
-        { rb.AddForce(Vector3.left * speed * Time.deltaTime, ForceMode.Impulse); }
-        if (Input.GetKey(KeyCode.D))
-        { rb.AddForce(-Vector3.left * speed * Time.deltaTime, ForceMode.Impulse); }
+        //Disparo 
+        if (Input.GetAxis(ControllerAxis.Disparo) > 0)
+        {
+            shoot();
+        }
 
 
+    }
+
+    /// <summary>
+    /// Determina la velocidad de la animacion
+    /// </summary>
+    /// <param name="currentSpeed">Multiplicador de la velocidad de la animacion</param>
+    private void setSpeedOfAnim(float currentSpeed)
+    {
+        float multiplicator;
+
+        if (currentSpeed != speed)
+            multiplicator = 1.5f;
+        else
+            multiplicator = 1f;
+
+        anim.SetFloat("Speed", multiplicator);
+    }
+
+    /// <summary>
+    /// Funcion que se llama cuando disparamos
+    /// </summary>
+    private void shoot()
+    {
+        Debug.Log("Disparando...");
     }
 
     /// <summary>
