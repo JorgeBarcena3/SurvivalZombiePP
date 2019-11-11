@@ -13,7 +13,8 @@ public static class ControllerAxis
     public static string RHorizontal = "Mouse X";
     public static string RVertical = "Mouse Y";
     public static string Disparo = "Right Trigger";
-    public static string Correr = "Left Trigger";
+    public static string Correr = "L3";
+    public static string Apuntar = "Left Trigger";
 
 
 }
@@ -48,31 +49,92 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Input.GetJoystickNames();
-        //Controles de movimiento con mando
+        detectarInput();
 
-        float currentSpeed = speed;
+        applyMovement(modifySpeed(speed));
 
+        applyRotation();
+
+
+    }
+
+    /// <summary>
+    /// Detecta los input del jugador
+    /// </summary>
+    private void detectarInput()
+    {
+        detectarDisparo();
+
+        detectarApuntado();
+    }
+
+    /// <summary>
+    /// Detecta si el jugador esta apuntando o no
+    /// </summary>
+    private void detectarApuntado()
+    {
+        if (Input.GetAxis(ControllerAxis.Apuntar) > 0)
+        {
+            disparar();
+        }
+    }
+
+    /// <summary>
+    /// Detectamos su el jugador esta disparando o no
+    /// </summary>
+    private void detectarDisparo()
+    {
+        //Disparo 
+        if (Input.GetAxis(ControllerAxis.Apuntar) > 0)
+        {
+            apuntar();
+        }
+    }
+
+    /// <summary>
+    /// Realizamos la accion de apuntar
+    /// </summary>
+    private void apuntar()
+    {
+        Vector3 direction = transform.forward;
+        Debug.DrawRay(transform.position, direction, Color.green);
+    }
+
+    /// <summary>
+    /// Movificamos la velocidad del jugador
+    /// </summary>
+    /// <param name="currentSpeed"></param>
+    /// <returns></returns>
+    private static float modifySpeed(float currentSpeed)
+    {
         //Detectamos si esta corriendo o no
         if (Input.GetAxis(ControllerAxis.Correr) > 0)
         {
             currentSpeed *= 2;
         }
 
-        setSpeedOfAnim(currentSpeed);
+        return currentSpeed;
+    }
 
+    /// <summary>
+    /// Aplicamos la rotacion al jugador
+    /// </summary>
+    private void applyRotation()
+    {
+        float angle = Mathf.Atan2(Input.GetAxis(ControllerAxis.RVertical), Input.GetAxis(ControllerAxis.RHorizontal)) * Mathf.Rad2Deg;
+        rb.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+    }
+
+    /// <summary>
+    /// Àplicamos el movimiento al jugador
+    /// </summary>
+    /// <param name="currentSpeed"></param>
+    private void applyMovement(float currentSpeed)
+    {
         rb.AddForce(-Vector3.right * -Input.GetAxis(ControllerAxis.LHorizontal) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
         rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
 
-        float angle = Mathf.Atan2(Input.GetAxis(ControllerAxis.RVertical), Input.GetAxis(ControllerAxis.RHorizontal)) * Mathf.Rad2Deg;
-        rb.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
-
-        //Disparo 
-        if (Input.GetAxis(ControllerAxis.Disparo) > 0)
-        {
-            shoot();
-        }
-
+        setSpeedOfAnim(currentSpeed);
 
     }
 
@@ -95,7 +157,7 @@ public class PlayerControls : MonoBehaviour
     /// <summary>
     /// Funcion que se llama cuando disparamos
     /// </summary>
-    private void shoot()
+    private void disparar()
     {
         Debug.Log("Disparando...");
     }
