@@ -5,13 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Rigidbody rb;
+    [HideInInspector]
+    public Rigidbody rb;
     [HideInInspector]
     public GameObject owner;
     [HideInInspector]
-    public int damage;
+    private int damage;
     [HideInInspector]
-    public int speed;
+    private int speed;
     private bool active;
     void Start()
     {
@@ -22,7 +23,7 @@ public class Bullet : MonoBehaviour
     {
         if (active)
         {
-
+            rb.AddForce(Vector3.forward * speed * Time.deltaTime, ForceMode.Acceleration);
         }
         
     }
@@ -37,4 +38,26 @@ public class Bullet : MonoBehaviour
             active = false;
         }
     }
+    public void SetActive()
+    {
+        active = true;
+        this.gameObject.SetActive(true);
+    }
+    public void SetInactive()
+    {
+        active = false;
+        this.gameObject.SetActive(false);
+
+    }
+
+    public void SetSpeed(int speed)
+    {
+        this.speed = speed;
+    }
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
+    public int GetDamage() { return damage; }
+    public int GetSpeed() { return speed; }
 }

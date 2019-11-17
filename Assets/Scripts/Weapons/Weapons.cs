@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Weapons : MonoBehaviour
 {
-    //poseedor del arma
-    [HideInInspector]
-    public Transform owner_transform;
     //instancia de la bala
     [HideInInspector]
     public GameObject bullet;
@@ -46,6 +44,12 @@ public class Weapons : MonoBehaviour
     private const float MAX_BULLETS_MID = 60;
     private const float MAX_BULLETS_SMALL = 30;
     #endregion
+    //Velocidad de la bala
+    #region speed
+    private const float SPEED_BIG = 300;
+    private const float SPEED_MID = 150;
+    private const float SPEED_SMALL = 80;
+    #endregion
     //distancia maxima a la que se puede disparar
     private float fire_distance;
     //tamaño del cargador
@@ -56,10 +60,14 @@ public class Weapons : MonoBehaviour
     private float firing_rate;
     //daño de disparo
     private float damage;
+    //velocidad de la bala
+    private float speed;
     //cantidad maxima de balas
     private float max_bullets;
     //balas que le quedan a esa arma
     private float current_bullets;
+    public GameObject bulletPool;
+    private Bullet my_bullet;
 
     //Tipos de arma que hay
     public enum list_kind_weapon { Sniper, Rifle, Gun };
@@ -68,36 +76,36 @@ public class Weapons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        owner_transform = GetComponentInParent<Transform>();
         if (kind_weapon == list_kind_weapon.Sniper)
         {
-            GetComponent<MeshRenderer>().material.color = Color.red;
             fire_distance = FIRE_DISTANCE_LONG;
             loader_size = LOADER_SIZE_SMALL;
             reload_time = RELOAD_TIME_MID;
             firing_rate = FIRING_RATE_SLOW;
+            speed = SPEED_BIG;
             damage = DAMAGE_STRONG;
             max_bullets = MAX_BULLETS_SMALL;
         }
 
         else if (kind_weapon == list_kind_weapon.Rifle)
         {
-            GetComponent<MeshRenderer>().material.color = Color.green;
+
             fire_distance = FIRE_DISTANCE_MID;
             loader_size = LOADER_SIZE_MID;
             reload_time = RELOAD_TIME_SLOW;
             firing_rate = FIRING_RATE_MID;
+            speed = SPEED_MID;
             damage = DAMAGE_MID;
             max_bullets = MAX_BULLETS_MID;
         }
 
         else if (kind_weapon == list_kind_weapon.Gun)
         {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
             fire_distance = FIRE_DISTANCE_SHORT;
             loader_size = LOADER_SIZE_BIG;
             reload_time = RELOAD_TIME_FAST;
             firing_rate = FIRING_RATE_FAST;
+            speed = SPEED_SMALL;
             damage = DAMAGE_WEAK;
             max_bullets = MAX_BULLETS_BIG;
         }
@@ -117,6 +125,15 @@ public class Weapons : MonoBehaviour
     }
     public void Shoot()
     {
+        var bullet = bulletPool.GetComponent<BulletPool>().GetBullet();
+        my_bullet = bullet.GetComponent<Bullet>();
+        bullet.transform.position = this.transform.position;
+        bullet.GetComponent<Rigidbody>().rotation = GetComponentInParent<Rigidbody>().rotation;
+        my_bullet.SetActive();
+        my_bullet.SetDamage((int)damage);
+        my_bullet.SetSpeed((int)speed);
+        
+
 
     }
     public void Reload()
@@ -132,21 +149,23 @@ public class Weapons : MonoBehaviour
     /// </summary>
     private void Swich_visibility()
     {
-        if (owner_transform != null)
+        if (this.GetComponentInParent<Transform>() != null)
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            GetComponentsInChildren<MeshRenderer>().Any(i => i.enabled = false);
+            
         }
         else
         {
-            GetComponent<MeshRenderer>().enabled = true;
+            GetComponentsInChildren<MeshRenderer>().Any(i => i.enabled = true);
 
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Mind" || other.gameObject.name == "Body")
+        if (other.gameObject.name == "player")
         {
             transform.SetParent(other.GetComponent<Transform>());
+            Swich_visibility();
 
         }
     }
