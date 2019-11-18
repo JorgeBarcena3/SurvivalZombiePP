@@ -102,6 +102,7 @@ public class Weapons : MonoBehaviour
     
     public void Shoot()
     {
+<<<<<<< HEAD
         if (current_bullets > 0)
         {
             var bullet = bulletPool.GetComponent<BulletPool>().GetBullet();
@@ -120,8 +121,18 @@ public class Weapons : MonoBehaviour
        
         
 
+=======
+        var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
+        my_bullet = bullet.GetComponent<Bullet>();
+        bullet.transform.position = muzzle.position;
+        bullet.transform.rotation = muzzle.rotation;
+        my_bullet.SetActive();
+        my_bullet.SetDamage((int)damage);
+        my_bullet.SetSpeed((int)speed);
+>>>>>>> 81ba1a744877b5d95bf83237ff06e7bd23873091
 
     }
+
     public void Reload()
     {
        

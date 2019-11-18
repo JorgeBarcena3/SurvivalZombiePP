@@ -30,9 +30,9 @@ public class SimpleShoot : MonoBehaviour
 
     void Shoot()
     {
-        //  GameObject bullet;
-        //  bullet = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
-        // bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
+        //  GameObject objectType;
+        //  objectType = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
+        // objectType.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
 
         GameObject tempFlash;
        Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation).GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
