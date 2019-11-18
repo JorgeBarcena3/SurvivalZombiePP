@@ -126,17 +126,16 @@ public class Weapons : MonoBehaviour
     }
     public void Shoot()
     {
-        var bullet = bulletPool.GetComponent<BulletPool>().GetBullet();
+        var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
         my_bullet = bullet.GetComponent<Bullet>();
         bullet.transform.position = muzzle.position;
         bullet.transform.rotation = muzzle.rotation;
         my_bullet.SetActive();
         my_bullet.SetDamage((int)damage);
         my_bullet.SetSpeed((int)speed);
-        
-
 
     }
+
     public void Reload()
     {
 

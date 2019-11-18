@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : PoolElement
 {
     // Start is called before the first frame update
     [HideInInspector]
@@ -11,9 +11,8 @@ public class Bullet : MonoBehaviour
     public GameObject owner;
     private int damage;
     private int speed;
-    private bool active;
     private int distance;
-    private Transform poolPosition;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,7 +27,6 @@ public class Bullet : MonoBehaviour
         
     }
 
-    public bool GetActive() { return active; }
     // Update is called once per frame
     public void OnCollisionEnter(Collision collision)
     {
@@ -39,18 +37,7 @@ public class Bullet : MonoBehaviour
         }
         SetInactive();
     }
-    public void SetActive()
-    {
-        active = true;
-        this.gameObject.SetActive(true);
-    }
-    public void SetInactive()
-    {
-        active = false;
-        gameObject.GetComponent<Transform>().position = poolPosition.position;
-        this.gameObject.SetActive(false);
-
-    }
+  
 
     public void SetSpeed(int speed)
     {
@@ -64,7 +51,7 @@ public class Bullet : MonoBehaviour
     {
         this.distance = distance;
     }
-    public void SetPositionPool(Transform poolPosition) { this.poolPosition = poolPosition; }
+
     public int GetDistance() { return distance; }
     public int GetDamage() { return damage; }
     public int GetSpeed() { return speed; }
