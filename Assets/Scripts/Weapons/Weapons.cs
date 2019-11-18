@@ -5,6 +5,7 @@ using System.Linq;
 
 public class Weapons : MonoBehaviour
 {
+    public Transform muzzle;
     //instancia de la bala
     [HideInInspector]
     public GameObject bullet;
@@ -46,9 +47,9 @@ public class Weapons : MonoBehaviour
     #endregion
     //Velocidad de la bala
     #region speed
-    private const float SPEED_BIG = 300;
-    private const float SPEED_MID = 150;
-    private const float SPEED_SMALL = 80;
+    private const float SPEED_BIG = 5000;
+    private const float SPEED_MID = 4000;
+    private const float SPEED_SMALL = 3000;
     #endregion
     //distancia maxima a la que se puede disparar
     private float fire_distance;
@@ -127,8 +128,8 @@ public class Weapons : MonoBehaviour
     {
         var bullet = bulletPool.GetComponent<BulletPool>().GetBullet();
         my_bullet = bullet.GetComponent<Bullet>();
-        bullet.transform.position = this.transform.position;
-        bullet.GetComponent<Rigidbody>().rotation = GetComponentInParent<Rigidbody>().rotation;
+        bullet.transform.position = muzzle.position;
+        bullet.transform.rotation = muzzle.rotation;
         my_bullet.SetActive();
         my_bullet.SetDamage((int)damage);
         my_bullet.SetSpeed((int)speed);
@@ -149,7 +150,7 @@ public class Weapons : MonoBehaviour
     /// </summary>
     private void Swich_visibility()
     {
-        if (this.GetComponentInParent<Transform>() != null)
+        if (this.GetComponentInParent<PlayerControls>() != null)
         {
             GetComponentsInChildren<MeshRenderer>().Any(i => i.enabled = false);
             

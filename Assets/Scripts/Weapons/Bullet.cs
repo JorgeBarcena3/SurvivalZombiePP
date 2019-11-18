@@ -9,11 +9,11 @@ public class Bullet : MonoBehaviour
     public Rigidbody rb;
     [HideInInspector]
     public GameObject owner;
-    [HideInInspector]
     private int damage;
-    [HideInInspector]
     private int speed;
     private bool active;
+    private int distance;
+    private Transform poolPosition;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
     {
         if (active)
         {
-            rb.AddForce(Vector3.forward * speed * Time.deltaTime, ForceMode.Acceleration);
+            rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.Acceleration);
         }
         
     }
@@ -32,11 +32,12 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject != owner)
+        if (collision.gameObject.GetComponent<Living>() != null)
         {
             collision.gameObject.GetComponent<Living>().MakeDamage(damage);
-            active = false;
+
         }
+        SetInactive();
     }
     public void SetActive()
     {
@@ -46,6 +47,7 @@ public class Bullet : MonoBehaviour
     public void SetInactive()
     {
         active = false;
+        gameObject.GetComponent<Transform>().position = poolPosition.position;
         this.gameObject.SetActive(false);
 
     }
@@ -58,6 +60,12 @@ public class Bullet : MonoBehaviour
     {
         this.damage = damage;
     }
+    public void SetDistance(int distance)
+    {
+        this.distance = distance;
+    }
+    public void SetPositionPool(Transform poolPosition) { this.poolPosition = poolPosition; }
+    public int GetDistance() { return distance; }
     public int GetDamage() { return damage; }
     public int GetSpeed() { return speed; }
 }

@@ -19,7 +19,9 @@ public class BulletPool : MonoBehaviour
         {
             aux = Instantiate(bullet, poolPosition, Quaternion.Euler(0, 0, 0));
             bullets.Add(aux);
+            aux.GetComponent<Bullet>().SetPositionPool(aux.transform);
             aux.GetComponent<Bullet>().SetInactive();
+           
 
         }
         

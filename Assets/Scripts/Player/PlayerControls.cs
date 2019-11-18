@@ -159,6 +159,7 @@ public class PlayerControls : MonoBehaviour
     /// </summary>
     private void disparar()
     {
+        GetComponentInChildren<Weapons>().Shoot();
         Debug.Log("Disparando...");
     }
 
