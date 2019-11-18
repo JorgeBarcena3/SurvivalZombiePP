@@ -34,12 +34,6 @@ public class Weapons : MonoBehaviour
     private const float FIRING_RATE_SLOW = 10;//es tan larga la espera porque es para el arma que solo tiene una bala en el cargador
     #endregion
     //los daños que van a provocar las distintas armas
-    #region damages
-    private const float DAMAGE_STRONG = 75;
-    private const float DAMAGE_MID = 60;
-    private const float DAMAGE_WEAK = 45;
-    #endregion
-    //el maximo de balas que tiene cada arma
     #region max byllets
     private const float MAX_BULLETS_BIG = 100;
     private const float MAX_BULLETS_MID = 60;
@@ -63,8 +57,6 @@ public class Weapons : MonoBehaviour
     private float damage;
     //velocidad de la bala
     private float speed;
-    //cantidad maxima de balas
-    private float max_bullets;
     //balas que le quedan a esa arma
     private float current_bullets;
     public GameObject bulletPool;
@@ -84,8 +76,6 @@ public class Weapons : MonoBehaviour
             reload_time = RELOAD_TIME_MID;
             firing_rate = FIRING_RATE_SLOW;
             speed = SPEED_BIG;
-            damage = DAMAGE_STRONG;
-            max_bullets = MAX_BULLETS_SMALL;
         }
 
         else if (kind_weapon == list_kind_weapon.Rifle)
@@ -96,8 +86,6 @@ public class Weapons : MonoBehaviour
             reload_time = RELOAD_TIME_SLOW;
             firing_rate = FIRING_RATE_MID;
             speed = SPEED_MID;
-            damage = DAMAGE_MID;
-            max_bullets = MAX_BULLETS_MID;
         }
 
         else if (kind_weapon == list_kind_weapon.Gun)
@@ -107,39 +95,47 @@ public class Weapons : MonoBehaviour
             reload_time = RELOAD_TIME_FAST;
             firing_rate = FIRING_RATE_FAST;
             speed = SPEED_SMALL;
-            damage = DAMAGE_WEAK;
-            max_bullets = MAX_BULLETS_BIG;
         }
-
-        Swich_visibility();
-
-
-
-
+        current_bullets = loader_size;
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     public void Shoot()
     {
-        var bullet = bulletPool.GetComponent<BulletPool>().GetBullet();
+<<<<<<< HEAD
+        if (current_bullets > 0)
+        {
+            var bullet = bulletPool.GetComponent<BulletPool>().GetBullet();
+            my_bullet = bullet.GetComponent<Bullet>();
+            bullet.transform.position = muzzle.position;
+            bullet.transform.rotation = muzzle.rotation;
+            my_bullet.SetActive();
+            my_bullet.SetDamage((int)damage);
+            my_bullet.SetSpeed((int)speed);
+
+        }
+        else
+        {
+            Reload();
+        }
+       
+        
+
+=======
+        var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
         my_bullet = bullet.GetComponent<Bullet>();
         bullet.transform.position = muzzle.position;
         bullet.transform.rotation = muzzle.rotation;
         my_bullet.SetActive();
         my_bullet.SetDamage((int)damage);
         my_bullet.SetSpeed((int)speed);
-        
-
+>>>>>>> 81ba1a744877b5d95bf83237ff06e7bd23873091
 
     }
+
     public void Reload()
     {
-
+       
     }
     public void Throw()
     {
@@ -148,25 +144,14 @@ public class Weapons : MonoBehaviour
     /// <summary>
     /// Cambia la visibilidad del objeto dependiendo de si es poseido o está en el suelo
     /// </summary>
-    private void Swich_visibility()
-    {
-        if (this.GetComponentInParent<PlayerControls>() != null)
-        {
-            GetComponentsInChildren<MeshRenderer>().Any(i => i.enabled = false);
-            
-        }
-        else
-        {
-            GetComponentsInChildren<MeshRenderer>().Any(i => i.enabled = true);
-
-        }
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "player")
         {
             transform.SetParent(other.GetComponent<Transform>());
-            Swich_visibility();
+            Transform hand = other.transform.Find("mixamorig12_Hips/mixamorig12_Spine/mixamorig12_Spine1/mixamorig12_Spine2/mixamorig12_LeftShoulder/mixamorig12_LeftArm/mixamorig12_LeftForeArm/mixamorig12_LeftHand");
+            transform.SetParent(hand);
+            transform.position = hand.position;
 
         }
     }

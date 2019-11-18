@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 6611467135812556871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.958083, y: 0.120015845, z: -2.5926368}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 6617606862338784417}
   - {fileID: 6613654654205129329}
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0930f0c2622963742a621350b474e9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzle: {fileID: 0}
   bullet: {fileID: 0}
   bulletPool: {fileID: 0}
   kind_weapon: 2

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class ZombieFollower : MonoBehaviour
+public class ZombieFollower : PoolElement
 {
 
     /// <summary>
