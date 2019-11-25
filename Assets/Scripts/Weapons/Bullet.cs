@@ -41,6 +41,7 @@ public class Bullet : PoolElement
 
     public void SetSpeed(int speed)
     {
+      
         this.speed = speed;
     }
     public void SetDamage(int damage)

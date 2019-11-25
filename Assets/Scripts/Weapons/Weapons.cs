@@ -29,9 +29,9 @@ public class Weapons : MonoBehaviour
     #endregion
     //cadencia de disparo de cada arma
     #region firing rates
-    private const float FIRING_RATE_FAST = 0.3f;
-    private const float FIRING_RATE_MID = 0.7f;
-    private const float FIRING_RATE_SLOW = 10;//es tan larga la espera porque es para el arma que solo tiene una bala en el cargador
+    private const float FIRING_RATE_FAST = 0.8f;
+    private const float FIRING_RATE_MID = 1.2f;
+    private const float FIRING_RATE_SLOW = 3;//es tan larga la espera porque es para el arma que solo tiene una bala en el cargador
     #endregion
     //los daños que van a provocar las distintas armas
     #region max byllets
@@ -111,7 +111,11 @@ public class Weapons : MonoBehaviour
         {
             firing_aux_rate += Time.deltaTime;
             if (firing_aux_rate >= firing_rate)
+            {
+                firing_aux_rate = 0;
                 firing = false;
+            }
+               
         }
         if (reloading)
         {
@@ -119,6 +123,7 @@ public class Weapons : MonoBehaviour
             if (reload_aux_time >= reload_time)
             {
                 current_bullets = loader_size;
+                reload_aux_time = 0;
                 reloading = false;
 
             }
@@ -166,6 +171,7 @@ public class Weapons : MonoBehaviour
             Transform hand = other.transform.Find("mixamorig12_Hips/mixamorig12_Spine/mixamorig12_Spine1/mixamorig12_Spine2/mixamorig12_LeftShoulder/mixamorig12_LeftArm/mixamorig12_LeftForeArm/mixamorig12_LeftHand");
             transform.SetParent(hand);
             transform.position = hand.position;
+            transform.rotation = Quaternion.Euler(0,0,0);
 
         }
     }
