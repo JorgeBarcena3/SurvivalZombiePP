@@ -61,6 +61,10 @@ public class Weapons : MonoBehaviour
     private float current_bullets;
     public GameObject bulletPool;
     private Bullet my_bullet;
+    private bool reloading;
+    private float reload_aux_time = 0;
+    private float firing_aux_rate = 0;
+    private bool firing = false;
 
     //Tipos de arma que hay
     public enum list_kind_weapon { Sniper, Rifle, Gun };
@@ -97,45 +101,55 @@ public class Weapons : MonoBehaviour
             speed = SPEED_SMALL;
         }
         current_bullets = loader_size;
+        reloading = false;
 
     }
-    
+
+    void Update()
+    {
+        if (firing)
+        {
+            firing_aux_rate += Time.deltaTime;
+            if (firing_aux_rate >= firing_rate)
+                firing = false;
+        }
+        if (reloading)
+        {
+            reload_aux_time += Time.deltaTime;
+            if (reload_aux_time >= reload_time)
+            {
+                current_bullets = loader_size;
+                reloading = false;
+
+            }
+        }
+        
+    }
+
     public void Shoot()
     {
-<<<<<<< HEAD
-        if (current_bullets > 0)
+        if (current_bullets > 0 && !firing)
         {
-            var bullet = bulletPool.GetComponent<BulletPool>().GetBullet();
+            var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
             my_bullet = bullet.GetComponent<Bullet>();
             bullet.transform.position = muzzle.position;
             bullet.transform.rotation = muzzle.rotation;
             my_bullet.SetActive();
             my_bullet.SetDamage((int)damage);
             my_bullet.SetSpeed((int)speed);
+            current_bullets--;
+            firing = true;
 
         }
         else
         {
             Reload();
         }
-       
-        
-
-=======
-        var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
-        my_bullet = bullet.GetComponent<Bullet>();
-        bullet.transform.position = muzzle.position;
-        bullet.transform.rotation = muzzle.rotation;
-        my_bullet.SetActive();
-        my_bullet.SetDamage((int)damage);
-        my_bullet.SetSpeed((int)speed);
->>>>>>> 81ba1a744877b5d95bf83237ff06e7bd23873091
-
     }
 
     public void Reload()
     {
-       
+        reloading = true;
     }
     public void Throw()
     {
