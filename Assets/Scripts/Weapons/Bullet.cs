@@ -16,11 +16,10 @@ public class Bullet : PoolElement
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        active = false;
     }
     void Update()
     {
-        if (active)
+        if (this.gameObject.activeSelf)
         {
             rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.Acceleration);
         }

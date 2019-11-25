@@ -28,8 +28,9 @@ public class PoolElement : MonoBehaviour
     /// </summary>
     public void SetActive()
     {
-        active = true;
+
         this.gameObject.SetActive(true);
+        active = true;
     }
 
     /// <summary>
