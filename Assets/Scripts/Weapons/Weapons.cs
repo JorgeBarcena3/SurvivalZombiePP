@@ -41,9 +41,14 @@ public class Weapons : MonoBehaviour
     #endregion
     //Velocidad de la bala
     #region speed
-    private const float SPEED_BIG = 5000;
-    private const float SPEED_MID = 4000;
-    private const float SPEED_SMALL = 3000;
+    private const float SPEED_BIG = 300;
+    private const float SPEED_MID = 200;
+    private const float SPEED_SMALL = 100;
+    #endregion
+    #region damage
+    private const int DAMAGE_BIG = 100;
+    private const int DAMAGE_MID = 60;
+    private const int DAMAGE_SMALL =30;
     #endregion
     //distancia maxima a la que se puede disparar
     private float fire_distance;
@@ -54,7 +59,7 @@ public class Weapons : MonoBehaviour
     //cadencia de disparo
     private float firing_rate;
     //daño de disparo
-    private float damage;
+    private int damage;
     //velocidad de la bala
     private float speed;
     //balas que le quedan a esa arma
@@ -80,6 +85,7 @@ public class Weapons : MonoBehaviour
             reload_time = RELOAD_TIME_MID;
             firing_rate = FIRING_RATE_SLOW;
             speed = SPEED_BIG;
+            damage = DAMAGE_BIG;
         }
 
         else if (kind_weapon == list_kind_weapon.Rifle)
@@ -90,6 +96,7 @@ public class Weapons : MonoBehaviour
             reload_time = RELOAD_TIME_SLOW;
             firing_rate = FIRING_RATE_MID;
             speed = SPEED_MID;
+            damage = DAMAGE_MID;
         }
 
         else if (kind_weapon == list_kind_weapon.Gun)
@@ -99,6 +106,7 @@ public class Weapons : MonoBehaviour
             reload_time = RELOAD_TIME_FAST;
             firing_rate = FIRING_RATE_FAST;
             speed = SPEED_SMALL;
+            damage = DAMAGE_SMALL;
         }
         current_bullets = loader_size;
         reloading = false;
@@ -137,11 +145,10 @@ public class Weapons : MonoBehaviour
         {
             var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
             my_bullet = bullet.GetComponent<Bullet>();
-            bullet.transform.position = muzzle.position;
-            bullet.transform.rotation = muzzle.rotation;
             my_bullet.SetActive();
-            my_bullet.SetDamage((int)damage);
-            my_bullet.SetSpeed((int)speed);
+            my_bullet.shoot((int)damage, (int)speed, muzzle.position, muzzle.rotation);
+            
+
             current_bullets--;
             firing = true;
 
@@ -168,10 +175,10 @@ public class Weapons : MonoBehaviour
         if (other.gameObject.name == "player")
         {
             transform.SetParent(other.GetComponent<Transform>());
-            Transform hand = other.transform.Find("mixamorig12_Hips/mixamorig12_Spine/mixamorig12_Spine1/mixamorig12_Spine2/mixamorig12_LeftShoulder/mixamorig12_LeftArm/mixamorig12_LeftForeArm/mixamorig12_LeftHand");
+            Transform hand = other.transform.Find("mixamorig12_Hips/mixamorig12_Spine/mixamorig12_Spine1/mixamorig12_Spine2/mixamorig12_LeftShoulder/mixamorig12_LeftArm/mixamorig12_LeftForeArm/mixamorig12_LeftHand/socket");
             transform.SetParent(hand);
             transform.position = hand.position;
-            transform.rotation = Quaternion.Euler(0,0,0);
+            transform.rotation = hand.rotation;
 
         }
     }

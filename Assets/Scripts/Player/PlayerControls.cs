@@ -159,7 +159,8 @@ public class PlayerControls : MonoBehaviour
     /// </summary>
     private void disparar()
     {
-        GetComponentInChildren<Weapons>().Shoot();
+        if (GetComponentInChildren<Weapons>())
+            GetComponentInChildren<Weapons>().Shoot();
     }
 
     /// <summary>

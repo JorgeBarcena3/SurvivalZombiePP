@@ -7,26 +7,19 @@ public class Bullet : PoolElement
     // Start is called before the first frame update
     [HideInInspector]
     public Rigidbody rb;
-    [HideInInspector]
-    public GameObject owner;
     private int damage;
-    private int speed;
-    private int distance;
 
-    void Start()
+    public void shoot(int damage, float speed, Vector3 position, Quaternion rotation)
     {
-        rb = GetComponent<Rigidbody>();
-    }
-    void Update()
-    {
-        if (this.gameObject.activeSelf)
-        {
-            rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.Acceleration);
-        }
-        
-    }
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
 
-    // Update is called once per frame
+        this.damage = damage;
+        transform.position = position;
+        transform.rotation = rotation;
+        rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.Impulse);
+    }
+  
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Living>() != null)
@@ -36,23 +29,8 @@ public class Bullet : PoolElement
         }
         SetInactive();
     }
-  
 
-    public void SetSpeed(int speed)
-    {
-      
-        this.speed = speed;
-    }
-    public void SetDamage(int damage)
-    {
-        this.damage = damage;
-    }
-    public void SetDistance(int distance)
-    {
-        this.distance = distance;
-    }
-
-    public int GetDistance() { return distance; }
-    public int GetDamage() { return damage; }
-    public int GetSpeed() { return speed; }
+   
+   
+   
 }

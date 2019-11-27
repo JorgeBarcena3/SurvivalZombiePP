@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PoolElement : MonoBehaviour
 {
-    /// <summary>
-    /// Determina si el objeto está activo o no
-    /// </summary>
-    protected bool active;
 
     /// <summary>
     /// Posicion del pool
@@ -20,7 +16,7 @@ public class PoolElement : MonoBehaviour
     /// <returns></returns>
     public bool GetActive()
     {
-        return active;
+        return this.gameObject.activeSelf;
     }
 
     /// <summary>
@@ -28,9 +24,8 @@ public class PoolElement : MonoBehaviour
     /// </summary>
     public void SetActive()
     {
-
+        GetComponent<Rigidbody>().isKinematic = false;
         this.gameObject.SetActive(true);
-        active = true;
     }
 
     /// <summary>
@@ -38,7 +33,7 @@ public class PoolElement : MonoBehaviour
     /// </summary>
     public void SetInactive()
     {
-        active = false;
+        GetComponent<Rigidbody>().isKinematic = true;
         gameObject.GetComponent<Transform>().position = poolPosition.position;
         this.gameObject.SetActive(false);
 
