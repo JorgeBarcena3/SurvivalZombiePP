@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Weapons : MonoBehaviour
 {
-    public Transform muzzle;
     //instancia de la bala
     [HideInInspector]
     public GameObject bullet;
@@ -45,6 +44,9 @@ public class Weapons : MonoBehaviour
     private const float SPEED_MID = 200;
     private const float SPEED_SMALL = 100;
     #endregion
+    /// <summary>
+    /// daño que hace el proyectil
+    /// </summary>
     #region damage
     private const int DAMAGE_BIG = 100;
     private const int DAMAGE_MID = 60;
@@ -146,7 +148,7 @@ public class Weapons : MonoBehaviour
             var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
             my_bullet = bullet.GetComponent<Bullet>();
             my_bullet.SetActive();
-            my_bullet.shoot((int)damage, (int)speed, muzzle.position, muzzle.rotation);
+            my_bullet.shoot((int)damage, (int)speed, transform.position, transform.rotation);
             
 
             current_bullets--;
