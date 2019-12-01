@@ -149,6 +149,7 @@ public class Weapons : MonoBehaviour
             my_bullet = bullet.GetComponent<Bullet>();
             my_bullet.SetActive();
             my_bullet.shoot((int)damage, (int)speed, transform.position, transform.rotation);
+            //GetComponentInChildren<HudGun>().Shoot();   estoy trabajando en esto, es el hud del arma, no tocar
             
 
             current_bullets--;
