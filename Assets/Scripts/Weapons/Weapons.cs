@@ -137,21 +137,27 @@ public class Weapons : MonoBehaviour
 
     public void Shoot()
     {
-        if (current_bullets > 0 && !firing)
+        if (current_bullets > 0)
         {
-            var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
-            my_bullet = bullet.GetComponent<Bullet>();
-            my_bullet.SetActive();
-            my_bullet.shoot(damage, speed, transform.position, transform.rotation);
-            GetComponentInChildren<HudGun>().Shoot(current_bullets); 
+            if (!firing) 
+            {
+                var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
+                my_bullet = bullet.GetComponent<Bullet>();
+                my_bullet.SetActive();
+                my_bullet.shoot(damage, speed, transform.position, transform.rotation);
+                GetComponentInChildren<HudGun>().Shoot(current_bullets);
 
-            current_bullets--;
-            firing = true;
+                current_bullets--;
+                firing = true;
+
+            }
+            
 
         }
         else
         {
             Reload();
+            GetComponentInChildren<HudGun>().Reload();
         }
     }
 
