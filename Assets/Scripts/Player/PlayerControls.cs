@@ -121,8 +121,18 @@ public class PlayerControls : MonoBehaviour
     /// </summary>
     private void applyRotation()
     {
-        float angle = Mathf.Atan2(Input.GetAxis(ControllerAxis.RVertical), Input.GetAxis(ControllerAxis.RHorizontal)) * Mathf.Rad2Deg;
-        rb.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+        float horizontal = Input.GetAxis(ControllerAxis.RVertical);
+        float vertical = Input.GetAxis(ControllerAxis.RHorizontal);
+
+        Vector3 direccion = new Vector3(horizontal, vertical);   
+
+        if (direccion.magnitude > 0.35)
+        {
+            float angle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
+            rb.rotation = Quaternion.Euler(new Vector3(0, -(angle - 180), 0));
+            
+        }
+
     }
 
     /// <summary>
