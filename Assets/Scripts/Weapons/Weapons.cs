@@ -13,9 +13,9 @@ public class Weapons : MonoBehaviour
     /// Espacio del cargador
     /// </summary>
     #region loader sizes
-    private const float LOADER_SIZE_BIG = 12;
-    private const float LOADER_SIZE_MID = 5;
-    private const float LOADER_SIZE_SMALL = 1;
+    private const int LOADER_SIZE_BIG = 12;
+    private const int LOADER_SIZE_MID = 5;
+    private const int LOADER_SIZE_SMALL = 1;
     #endregion
     /// <summary>
     /// Tiempo de recarga
@@ -37,9 +37,9 @@ public class Weapons : MonoBehaviour
     /// velocidad de disparo
     /// </summary>
     #region speed
-    private const float SPEED_BIG = 300;
-    private const float SPEED_MID = 200;
-    private const float SPEED_SMALL = 100;
+    private const int SPEED_BIG = 300;
+    private const int SPEED_MID = 200;
+    private const int SPEED_SMALL = 100;
     #endregion
     /// <summary>
     /// daño que hace el proyectil
@@ -50,7 +50,7 @@ public class Weapons : MonoBehaviour
     private const int DAMAGE_SMALL = 30;
     #endregion
     //tamaño del cargador
-    private float loader_size;
+    private int loader_size;
     //tiempo de recarga
     private float reload_time;
     //cadencia de disparo
@@ -58,9 +58,9 @@ public class Weapons : MonoBehaviour
     //daño de disparo
     private int damage;
     //velocidad de la bala
-    private float speed;
+    private int speed;
     //balas que le quedan a esa arma
-    private float current_bullets;
+    private int current_bullets;
     public GameObject bulletPool;
     private Bullet my_bullet;
     private bool reloading;
@@ -104,6 +104,8 @@ public class Weapons : MonoBehaviour
         }
         current_bullets = loader_size;
         reloading = false;
+        GetComponentInChildren<HudGun>().Initialized(loader_size);
+        this.transform.Find("Canvas").GetComponent<ActiveCanvasOnPosession>().setCanvasInactive();
 
     }
 
@@ -140,8 +142,8 @@ public class Weapons : MonoBehaviour
             var bullet = bulletPool.GetComponent<Pool>().GetType<Bullet>();
             my_bullet = bullet.GetComponent<Bullet>();
             my_bullet.SetActive();
-            my_bullet.shoot((int)damage, (int)speed, transform.position, transform.rotation);
-            GetComponentInChildren<HudGun>().Shoot(); //  estoy trabajando en esto, es el hud del arma, no tocar
+            my_bullet.shoot(damage, speed, transform.position, transform.rotation);
+            GetComponentInChildren<HudGun>().Shoot(current_bullets); 
 
             current_bullets--;
             firing = true;

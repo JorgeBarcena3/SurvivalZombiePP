@@ -13,33 +13,30 @@ public class HudGun : MonoBehaviour
     /// Array de imagenes de bala
     /// </summary>
     private GameObject [] bullets;
-    /// <summary>
-    /// Indica la cantidad de balas que se van a mostrar en el hud
-    /// </summary>
-    private int bulletsCount;
+  
 
-
-    void Start()
+    public void Initialized(int Count)
     {
-       
-        bulletsCount = 6;
 
-        bullets = new GameObject[bulletsCount];
-        for (int i = 0; i < bulletsCount;i++) 
+        bullets = new GameObject[Count];
+        for (int i = 0; i < Count; i++)
         {
-            bullets[i] = Instantiate(bulletImage,default,default,this.transform).gameObject;
+            bullets[i] = Instantiate(bulletImage, default, default, this.transform).gameObject;
         }
-        
     }
-    public void Shoot() 
-    {
-        if (bulletsCount > 0) 
-        {
-            bullets[bulletsCount-1].SetActive(false);
-            bulletsCount--;
-        }
-        
 
+    public void Shoot(int bulletsCount) 
+    {
+      
+        bullets[bulletsCount-1].SetActive(false);
+       
+    }
+    public void Reload() 
+    {
+        for (int i = 0; i < bullets.Length;i++)
+        {
+            bullets[i].SetActive(true);
+        }
 
     }
 }
