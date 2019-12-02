@@ -34,7 +34,7 @@ public class HudGun : MonoBehaviour
         bulletsCount = 6;
 
         bullets = new Image[bulletsCount];
-        for (int i = 0; i < bulletsCount; i++) 
+        for (int i = 0; i < bulletsCount;i++) 
         {
             bullets[i] = bulletImage; 
             Vector2 myPosition = new Vector2(GetComponent<RectTransform>().rect.width - halfImageWidth * (1+i), halfImageHeight);
@@ -46,7 +46,7 @@ public class HudGun : MonoBehaviour
     }
     public void Shoot() 
     {
-        if (bulletsCount >= 0) 
+        if (bulletsCount > 0) 
         {
             bullets[bulletsCount-1].gameObject.SetActive(false);
             bulletsCount--;

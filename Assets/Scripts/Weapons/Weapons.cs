@@ -8,37 +8,34 @@ public class Weapons : MonoBehaviour
     //instancia de la bala
     [HideInInspector]
     public GameObject bullet;
-    //distancias maximas
-    #region distances of fire
-    private const float FIRE_DISTANCE_LONG = 300;
-    private const float FIRE_DISTANCE_MID = 200;
-    private const float FIRE_DISTANCE_SHORT = 100;
-    #endregion
-    //cantidad de balas por tipo de cargador
+    
+    /// <summary>
+    /// Espacio del cargador
+    /// </summary>
     #region loader sizes
     private const float LOADER_SIZE_BIG = 12;
     private const float LOADER_SIZE_MID = 5;
     private const float LOADER_SIZE_SMALL = 1;
     #endregion
-    //tiempo de recarga de cada arma
+    /// <summary>
+    /// Tiempo de recarga
+    /// </summary>
     #region reload times
     private const float RELOAD_TIME_FAST = 1;
     private const float RELOAD_TIME_MID = 2;
     private const float RELOAD_TIME_SLOW = 3;
     #endregion
-    //cadencia de disparo de cada arma
+    /// <summary>
+    /// tiempo entre disparos
+    /// </summary>
     #region firing rates
     private const float FIRING_RATE_FAST = 0.8f;
     private const float FIRING_RATE_MID = 1.2f;
     private const float FIRING_RATE_SLOW = 3;//es tan larga la espera porque es para el arma que solo tiene una bala en el cargador
     #endregion
-    //los daños que van a provocar las distintas armas
-    #region max byllets
-    private const float MAX_BULLETS_BIG = 100;
-    private const float MAX_BULLETS_MID = 60;
-    private const float MAX_BULLETS_SMALL = 30;
-    #endregion
-    //Velocidad de la bala
+    /// <summary>
+    /// velocidad de disparo
+    /// </summary>
     #region speed
     private const float SPEED_BIG = 300;
     private const float SPEED_MID = 200;
@@ -50,10 +47,8 @@ public class Weapons : MonoBehaviour
     #region damage
     private const int DAMAGE_BIG = 100;
     private const int DAMAGE_MID = 60;
-    private const int DAMAGE_SMALL =30;
+    private const int DAMAGE_SMALL = 30;
     #endregion
-    //distancia maxima a la que se puede disparar
-    private float fire_distance;
     //tamaño del cargador
     private float loader_size;
     //tiempo de recarga
@@ -82,7 +77,6 @@ public class Weapons : MonoBehaviour
     {
         if (kind_weapon == list_kind_weapon.Sniper)
         {
-            fire_distance = FIRE_DISTANCE_LONG;
             loader_size = LOADER_SIZE_SMALL;
             reload_time = RELOAD_TIME_MID;
             firing_rate = FIRING_RATE_SLOW;
@@ -93,7 +87,6 @@ public class Weapons : MonoBehaviour
         else if (kind_weapon == list_kind_weapon.Rifle)
         {
 
-            fire_distance = FIRE_DISTANCE_MID;
             loader_size = LOADER_SIZE_MID;
             reload_time = RELOAD_TIME_SLOW;
             firing_rate = FIRING_RATE_MID;
@@ -103,7 +96,6 @@ public class Weapons : MonoBehaviour
 
         else if (kind_weapon == list_kind_weapon.Gun)
         {
-            fire_distance = FIRE_DISTANCE_SHORT;
             loader_size = LOADER_SIZE_BIG;
             reload_time = RELOAD_TIME_FAST;
             firing_rate = FIRING_RATE_FAST;
@@ -149,8 +141,7 @@ public class Weapons : MonoBehaviour
             my_bullet = bullet.GetComponent<Bullet>();
             my_bullet.SetActive();
             my_bullet.shoot((int)damage, (int)speed, transform.position, transform.rotation);
-            //GetComponentInChildren<HudGun>().Shoot();   estoy trabajando en esto, es el hud del arma, no tocar
-            
+            //GetComponentInChildren<HudGun>().Shoot(); //  estoy trabajando en esto, es el hud del arma, no tocar
 
             current_bullets--;
             firing = true;
