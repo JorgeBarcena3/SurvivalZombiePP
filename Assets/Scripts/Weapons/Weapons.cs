@@ -141,7 +141,7 @@ public class Weapons : MonoBehaviour
             my_bullet = bullet.GetComponent<Bullet>();
             my_bullet.SetActive();
             my_bullet.shoot((int)damage, (int)speed, transform.position, transform.rotation);
-            //GetComponentInChildren<HudGun>().Shoot(); //  estoy trabajando en esto, es el hud del arma, no tocar
+            GetComponentInChildren<HudGun>().Shoot(); //  estoy trabajando en esto, es el hud del arma, no tocar
 
             current_bullets--;
             firing = true;
@@ -159,6 +159,7 @@ public class Weapons : MonoBehaviour
     }
     public void Throw()
     {
+        this.transform.Find("Canvas").GetComponent<ActiveCanvasOnPosession>().setCanvasInactive();
 
     }
     /// <summary>
@@ -173,6 +174,7 @@ public class Weapons : MonoBehaviour
             transform.SetParent(hand);
             transform.position = hand.position;
             transform.rotation = hand.rotation;
+            this.transform.Find("Canvas").GetComponent<ActiveCanvasOnPosession>().SetCanvasActive();
 
         }
     }
