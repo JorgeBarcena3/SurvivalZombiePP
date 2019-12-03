@@ -2654,6 +2654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5985159925219767529}
   - component: {fileID: 4606054801965608264}
+  - component: {fileID: 3016783185561122562}
   m_Layer: 8
   m_Name: AreaAttack
   m_TagString: Untagged
@@ -2688,6 +2689,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: 0.8056097, z: 0}
+--- !u!114 &3016783185561122562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851727477233536307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e1b174199d4414cb0c985548bdaf6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  attackRate: 3
 --- !u!1 &8955009475955627260
 GameObject:
   m_ObjectHideFlags: 0

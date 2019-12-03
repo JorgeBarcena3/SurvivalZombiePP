@@ -16,13 +16,20 @@ public class Living : MonoBehaviour
     public Image myHealthBar;
     private int maxHealth;
     private int health;
+    void Start()
+    {
+        maxHealth = initHealth; health = maxHealth;
+        if(myHealthBar!=null)
+            myHealthBar.transform.localScale = Vector3.one;
+    }
     /// <summary>
     /// Reinicia o inicia la vida a la establecida por defecto desde el editor o 100
     /// </summary>
     public void InitLiver()
     {
         maxHealth = initHealth ; health = maxHealth;
-        myHealthBar.transform.localScale = Vector3.one;
+        if (myHealthBar != null)
+            myHealthBar.transform.localScale = Vector3.one;
     }
     /// <summary>
     /// Reinicia o inicia la vida a la establecida por parámetros
@@ -31,7 +38,8 @@ public class Living : MonoBehaviour
     public void InitLiver(int health)
     {
         maxHealth = health; this.health = maxHealth;
-        myHealthBar.transform.localScale = Vector3.one;
+        if (myHealthBar != null)
+            myHealthBar.transform.localScale = Vector3.one;
     }
 
    
