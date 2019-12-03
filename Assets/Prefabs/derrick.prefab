@@ -407,8 +407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919422232db86ae4581e96637a33f026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {fileID: 5704864277409978739, guid: bad31a379b2fa8349856d0ec539079e4,
-    type: 3}
   speed: 2
 --- !u!195 &7222398901883719110
 NavMeshAgent:
@@ -2005,7 +2003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.67844296, b: 0, a: 0.6627451}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:

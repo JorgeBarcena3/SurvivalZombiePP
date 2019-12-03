@@ -30,12 +30,22 @@ public class Pool : MonoBehaviour
     /// Lista de objetos en el pool
     /// </summary>
     private List<GameObject> poolList;
-    
+    /// <summary>
+    /// Instancia de si mismo, acesible desde cualquier parte del proyecto
+    /// </summary>
+    public static Pool instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
     /// <summary>
     /// Instanciamos los objetos del pull
     /// </summary>
     void Start()
-    {    
+    {
+       
 
         poolList = new List<GameObject>();
 

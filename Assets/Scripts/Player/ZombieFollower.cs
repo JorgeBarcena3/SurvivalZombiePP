@@ -14,7 +14,7 @@ public class ZombieFollower : PoolElement
     /// <summary>
     /// Position to follow
     /// </summary>
-    public GameObject targetPosition;
+    private GameObject targetPosition;
 
     /// <summary>
     /// Velocidad del zombie
@@ -29,6 +29,7 @@ public class ZombieFollower : PoolElement
     // Start is called before the first frame update
     void Start()
     {
+        targetPosition = PlayerControls.instance.gameObject;
         //rb = GetComponent<Rigidbody>();
         //speed *= 100;
 

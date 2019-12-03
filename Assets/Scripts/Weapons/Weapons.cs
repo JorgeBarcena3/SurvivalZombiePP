@@ -61,7 +61,7 @@ public class Weapons : MonoBehaviour
     private int speed;
     //balas que le quedan a esa arma
     private int current_bullets;
-    public GameObject bulletPool;
+    private GameObject bulletPool;
     private Bullet my_bullet;
     private bool reloading;
     private float reload_aux_time = 0;
@@ -75,6 +75,8 @@ public class Weapons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+      
+
         if (kind_weapon == list_kind_weapon.Sniper)
         {
             loader_size = LOADER_SIZE_SMALL;
@@ -106,11 +108,13 @@ public class Weapons : MonoBehaviour
         reloading = false;
         GetComponentInChildren<HudGun>().Initialized(loader_size);
         this.transform.Find("Canvas").GetComponent<ActiveCanvasOnPosession>().setCanvasInactive();
+        bulletPool = Pool.instance.gameObject;
 
     }
 
     void Update()
     {
+       
         if (firing)
         {
             firing_aux_rate += Time.deltaTime;
@@ -137,6 +141,7 @@ public class Weapons : MonoBehaviour
 
     public void Shoot()
     {
+
         if (current_bullets > 0)
         {
             if (!firing) 

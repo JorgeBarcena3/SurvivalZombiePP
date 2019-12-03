@@ -35,11 +35,16 @@ public class PlayerControls : MonoBehaviour
     /// Componente animator
     /// </summary>
     private Animator anim;
+    /// <summary>
+    /// Referencia del player accesible desde cualquier punto del proyecto
+    /// </summary>
+    public static PlayerControls instance;
 
 
 
     void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 

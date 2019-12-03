@@ -42,6 +42,7 @@ public class ZombieManager : MonoBehaviour
             GameObject zombie = pool.GetComponent<Pool>().GetType<ZombieFollower>();
             ZombieFollower component = zombie.GetComponent<ZombieFollower>();
             zombie.transform.position = positionToSpawn;
+            zombie.GetComponent<Living>().InitLiver();
             component.SetActive();
             currentTime = 0;
 
