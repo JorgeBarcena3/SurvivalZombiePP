@@ -36,7 +36,7 @@ public class AttackDetection : MonoBehaviour
     {
         if (auxRate < attackRate) 
         {
-            auxRate = Time.deltaTime;
+            auxRate += Time.deltaTime;
         }
 
         if (CanAttack)
@@ -49,7 +49,7 @@ public class AttackDetection : MonoBehaviour
     /// <param name="other">se espera al player</param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") 
+        if (other.GetComponent<PlayerControls>()) 
         {
             CanAttack = true;
         }
@@ -60,7 +60,7 @@ public class AttackDetection : MonoBehaviour
     /// <param name="other">se espera al player</param>
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.GetComponent<PlayerControls>())
         {
             CanAttack = false;
         }
