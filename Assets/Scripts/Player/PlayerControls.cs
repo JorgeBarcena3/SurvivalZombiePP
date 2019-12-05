@@ -110,12 +110,17 @@ public class PlayerControls : MonoBehaviour
     /// </summary>
     /// <param name="currentSpeed"></param>
     /// <returns></returns>
-    private static float modifySpeed(float currentSpeed)
+    private float modifySpeed(float currentSpeed)
     {
         //Detectamos si esta corriendo o no
         if (Input.GetAxis(ControllerAxis.Correr) > 0)
         {
             currentSpeed *= 2;
+            anim.SetBool("Running", true);
+        }
+        else 
+        {
+            anim.SetBool("Running", false);
         }
 
         return currentSpeed;
@@ -150,6 +155,14 @@ public class PlayerControls : MonoBehaviour
         rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
 
         setSpeedOfAnim(currentSpeed);
+        if ((Input.GetAxis(ControllerAxis.LVertical) <= 0 && transform.rotation.eulerAngles.y < 90 && transform.rotation.eulerAngles.y > -90) || (Input.GetAxis(ControllerAxis.LHorizontal) >= 0 && transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270))
+        {
+            anim.SetBool("Forward", true);
+        }
+        else 
+        {
+            anim.SetBool("Forward", false);
+        }
 
     }
 
@@ -174,8 +187,12 @@ public class PlayerControls : MonoBehaviour
     /// </summary>
     private void disparar()
     {
-        if (GetComponentInChildren<Weapons>())
+        if (GetComponentInChildren<Weapons>()) 
+        {
             GetComponentInChildren<Weapons>().Shoot();
+            anim.SetTrigger("Shooting");
+        }
+            
     }
 
     /// <summary>
