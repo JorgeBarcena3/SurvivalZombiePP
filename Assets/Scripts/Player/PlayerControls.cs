@@ -34,7 +34,8 @@ public class PlayerControls : MonoBehaviour
     /// <summary>
     /// Componente animator
     /// </summary>
-    private Animator anim;
+    [HideInInspector]
+    public Animator anim;
     /// <summary>
     /// Referencia del player accesible desde cualquier punto del proyecto
     /// </summary>
@@ -47,6 +48,7 @@ public class PlayerControls : MonoBehaviour
         instance = this;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        anim.SetInteger("Armament", 0);
 
 
     }

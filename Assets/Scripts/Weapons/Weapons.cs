@@ -172,6 +172,8 @@ public class Weapons : MonoBehaviour
     }
     public void Throw()
     {
+        
+        this.transform.SetParent(null);
         this.transform.Find("Canvas").GetComponent<ActiveCanvasOnPosession>().setCanvasInactive();
 
     }
@@ -188,6 +190,7 @@ public class Weapons : MonoBehaviour
             transform.position = hand.position;
             transform.rotation = hand.rotation;
             this.transform.Find("Canvas").GetComponent<ActiveCanvasOnPosession>().SetCanvasActive();
+            other.GetComponent<PlayerControls>().anim.SetInteger("Armament",1);
 
         }
     }
