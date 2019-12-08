@@ -185,16 +185,26 @@ public class PlayerControls : MonoBehaviour
     }
 
     /// <summary>
-    /// Funcion que se llama cuando disparamos
+    /// Esta función lanza la animación de disparar
     /// </summary>
     private void disparar()
     {
         if (GetComponentInChildren<Weapons>()) 
         {
-            GetComponentInChildren<Weapons>().Shoot();
             anim.SetTrigger("Shooting");
         }
             
+    }
+    /// <summary>
+    /// Esta funcion llama a la funcion del arma equipada que dispara
+    /// A esta función se la llama desde un evento puesto en la animación de disparar
+    /// </summary>
+    public void shoot()
+    {
+        if (GetComponentInChildren<Weapons>())
+        {
+            GetComponentInChildren<Weapons>().Shoot();
+        }
     }
 
     /// <summary>
