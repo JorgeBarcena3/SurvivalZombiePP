@@ -16,8 +16,10 @@ public class Living : MonoBehaviour
     public Image myHealthBar;
     private int maxHealth;
     private int health;
+    private Animator myAnimator;
     void Start()
     {
+        myAnimator = GetComponent<Animator>();
         maxHealth = initHealth; health = maxHealth;
         if(myHealthBar!=null)
             myHealthBar.transform.localScale = Vector3.one;
@@ -46,6 +48,7 @@ public class Living : MonoBehaviour
     public void MakeDamage(int damage)
     {
         health -= damage;
+        myAnimator.SetTrigger("Hit");
         if (myHealthBar != null)
         {
             myHealthBar.transform.localScale =new Vector3((float)health/maxHealth, 1, 1);

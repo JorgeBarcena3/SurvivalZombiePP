@@ -73,10 +73,18 @@ public class AttackDetection : MonoBehaviour
     {
         if (auxRate >= attackRate) 
         {
-            //aquí se lanzaria la animacion de ataque del zombie
-            playerLiving.MakeDamage(damage);
+            myAnimator.SetTrigger("Attack");
+            MakeDamage();
             auxRate = 0f;
         }
 
+    }
+    /// <summary>
+    /// Esta es la funcion que hace daño al jugador
+    /// Se la llama desde la animacion de ataque (se debería llamar desde el animator)
+    /// </summary>
+    public void MakeDamage()
+    {
+        playerLiving.MakeDamage(damage);
     }
 }
