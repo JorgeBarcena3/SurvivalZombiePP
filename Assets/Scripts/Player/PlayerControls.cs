@@ -159,7 +159,7 @@ public class PlayerControls : MonoBehaviour
 
         Debug.Log(_currentSpeed);
 
-        setSpeedOfAnim(currentSpeed);
+        setSpeedOfAnim(_currentSpeed);
         /*if ((Input.GetAxis(ControllerAxis.LVertical) <= 0 && transform.rotation.eulerAngles.y < 90 && transform.rotation.eulerAngles.y > -90) || (Input.GetAxis(ControllerAxis.LHorizontal) >= 0 && transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270))
         {
             anim.SetBool("Forward", true);

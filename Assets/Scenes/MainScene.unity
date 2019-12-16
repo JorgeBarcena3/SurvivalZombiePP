@@ -740,6 +740,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6614032198383112297, guid: 8b40f0824b65460408792be8139e0ccd,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7594433
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614032198383112297, guid: 8b40f0824b65460408792be8139e0ccd,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7594428
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614032198383112297, guid: 8b40f0824b65460408792be8139e0ccd,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75944304
+      objectReference: {fileID: 0}
     - target: {fileID: 9120042824529679250, guid: 8b40f0824b65460408792be8139e0ccd,
         type: 3}
       propertyPath: bulletPool
@@ -1027,7 +1042,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6f3b764d69dc4d04d8e2ce516d2dfaa3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
