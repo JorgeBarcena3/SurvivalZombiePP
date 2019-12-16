@@ -17,18 +17,24 @@ public class Living : MonoBehaviour
     private int maxHealth;
     private int health;
     private Animator myAnimator;
+    public GameObject canvas;
+
     void Start()
     {
         myAnimator = GetComponent<Animator>();
         maxHealth = initHealth; health = maxHealth;
         if(myHealthBar!=null)
             myHealthBar.transform.localScale = Vector3.one;
+        if (canvas)
+            canvas.SetActive(false);
     }
     /// <summary>
     /// Reinicia o inicia la vida a la establecida por defecto desde el editor o 100
     /// </summary>
     public void InitLiver()
     {
+        if (canvas)
+            canvas.SetActive(false);
         maxHealth = initHealth ; health = maxHealth;
         if (myHealthBar != null)
             myHealthBar.transform.localScale = Vector3.one;
@@ -39,6 +45,8 @@ public class Living : MonoBehaviour
     /// <param name="health">vida con la que se va a iniciar el ente</param>
     public void InitLiver(int health)
     {
+        if (canvas)
+            canvas.SetActive(false);
         maxHealth = health; this.health = maxHealth;
         if (myHealthBar != null)
             myHealthBar.transform.localScale = Vector3.one;
@@ -47,6 +55,9 @@ public class Living : MonoBehaviour
    
     public void MakeDamage(int damage)
     {
+        if(canvas)
+            canvas.SetActive(true);
+
         health -= damage;
         myAnimator.SetTrigger("Hit");
         if (myHealthBar != null)
