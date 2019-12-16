@@ -67,6 +67,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 1
+        functionName: resetShootingWeapon
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 32b797654a52518458546c0d589e0c34,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

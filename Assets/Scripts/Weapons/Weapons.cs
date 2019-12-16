@@ -115,16 +115,7 @@ public class Weapons : MonoBehaviour
     void Update()
     {
        
-        if (firing)
-        {
-            firing_aux_rate += Time.deltaTime;
-            if (firing_aux_rate >= firing_rate)
-            {
-                firing_aux_rate = 0;
-                firing = false;
-            }
-               
-        }
+       
         if (reloading)
         {
             reload_aux_time += Time.deltaTime;
@@ -193,5 +184,9 @@ public class Weapons : MonoBehaviour
             other.GetComponent<PlayerControls>().anim.SetInteger("Armament",1);
 
         }
+    }
+    public void firingFalse() 
+    {
+        firing = false; 
     }
 }

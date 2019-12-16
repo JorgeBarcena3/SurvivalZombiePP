@@ -157,14 +157,14 @@ public class PlayerControls : MonoBehaviour
         rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
 
         setSpeedOfAnim(currentSpeed);
-        if ((Input.GetAxis(ControllerAxis.LVertical) <= 0 && transform.rotation.eulerAngles.y < 90 && transform.rotation.eulerAngles.y > -90) || (Input.GetAxis(ControllerAxis.LHorizontal) >= 0 && transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270))
+        /*if ((Input.GetAxis(ControllerAxis.LVertical) <= 0 && transform.rotation.eulerAngles.y < 90 && transform.rotation.eulerAngles.y > -90) || (Input.GetAxis(ControllerAxis.LHorizontal) >= 0 && transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270))
         {
             anim.SetBool("Forward", true);
         }
         else 
         {
             anim.SetBool("Forward", false);
-        }
+        }*/
 
     }
 
@@ -222,4 +222,5 @@ public class PlayerControls : MonoBehaviour
             anim.SetBool("Moving", true);
         }
     }
+    public void resetShootingWeapon() { GetComponentInChildren<Weapons>().firingFalse(); }
 }
