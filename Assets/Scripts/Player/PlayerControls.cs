@@ -62,7 +62,6 @@ public class PlayerControls : MonoBehaviour
 
         applyRotation();
 
-
     }
 
     /// <summary>
@@ -136,14 +135,11 @@ public class PlayerControls : MonoBehaviour
         float horizontal = Input.GetAxis(ControllerAxis.RVertical);
         float vertical = Input.GetAxis(ControllerAxis.RHorizontal);
 
-        Vector3 direccion = new Vector3(horizontal, vertical);   
+        Vector3 direccion = new Vector3(horizontal, vertical);
 
-        if (direccion.magnitude > 0.35)
-        {
-            float angle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
-            rb.rotation = Quaternion.Euler(new Vector3(0, -(angle - 180), 0));
-            
-        }
+        float angle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
+        rb.rotation = angle != 0 ? Quaternion.Euler(new Vector3(0, -(angle - 180), 0)) : rb.rotation;
+
 
     }
 
@@ -151,12 +147,18 @@ public class PlayerControls : MonoBehaviour
     /// Àplicamos el movimiento al jugador
     /// </summary>
     /// <param name="currentSpeed"></param>
-    private void applyMovement(float currentSpeed)
+    private void applyMovement(float _currentSpeed)
     {
-        rb.AddForce(-Vector3.right * -Input.GetAxis(ControllerAxis.LHorizontal) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
-        rb.AddForce(Vector3.forward * -Input.GetAxis(ControllerAxis.LVertical) * currentSpeed * 50 * Time.deltaTime, ForceMode.Acceleration);
+       
+        Vector3 desiredVelocity = Input.GetAxis(ControllerAxis.LHorizontal) * Vector3.right
+                                + Input.GetAxis(ControllerAxis.LVertical) * -Vector3.forward;
 
-        setSpeedOfAnim(currentSpeed);
+        rb.velocity = Vector3.Lerp(rb.velocity, desiredVelocity * _currentSpeed, Time.deltaTime);
+
+        setSpeedOfAnim(_currentSpeed);
+
+        Debug.Log(_currentSpeed);
+
         if ((Input.GetAxis(ControllerAxis.LVertical) <= 0 && transform.rotation.eulerAngles.y < 90 && transform.rotation.eulerAngles.y > -90) || (Input.GetAxis(ControllerAxis.LHorizontal) >= 0 && transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270))
         {
             anim.SetBool("Forward", true);

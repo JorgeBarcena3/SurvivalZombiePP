@@ -51,7 +51,7 @@ public class Living : MonoBehaviour
         myAnimator.SetTrigger("Hit");
         if (myHealthBar != null)
         {
-            myHealthBar.transform.localScale =new Vector3((float)health/maxHealth, 1, 1);
+            myHealthBar.transform.localScale = new Vector3((float)health/maxHealth, 1, 1);
         }
         if (health <= 0)
             Dead();
