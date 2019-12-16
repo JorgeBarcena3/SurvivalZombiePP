@@ -53,8 +53,6 @@ public class Weapons : MonoBehaviour
     private int loader_size;
     //tiempo de recarga
     private float reload_time;
-    //cadencia de disparo
-    private float firing_rate;
     //daño de disparo
     private int damage;
     //velocidad de la bala
@@ -65,7 +63,6 @@ public class Weapons : MonoBehaviour
     private Bullet my_bullet;
     private bool reloading;
     private float reload_aux_time = 0;
-    private float firing_aux_rate = 0;
     private bool firing = false;
 
     //Tipos de arma que hay
@@ -81,7 +78,6 @@ public class Weapons : MonoBehaviour
         {
             loader_size = LOADER_SIZE_SMALL;
             reload_time = RELOAD_TIME_MID;
-            firing_rate = FIRING_RATE_SLOW;
             speed = SPEED_BIG;
             damage = DAMAGE_BIG;
         }
@@ -91,7 +87,6 @@ public class Weapons : MonoBehaviour
 
             loader_size = LOADER_SIZE_MID;
             reload_time = RELOAD_TIME_SLOW;
-            firing_rate = FIRING_RATE_MID;
             speed = SPEED_MID;
             damage = DAMAGE_MID;
         }
@@ -100,7 +95,6 @@ public class Weapons : MonoBehaviour
         {
             loader_size = LOADER_SIZE_BIG;
             reload_time = RELOAD_TIME_FAST;
-            firing_rate = FIRING_RATE_FAST;
             speed = SPEED_SMALL;
             damage = DAMAGE_SMALL;
         }
