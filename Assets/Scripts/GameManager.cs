@@ -21,7 +21,14 @@ public class GameManager : MonoBehaviour
     {
         if(instance == null)
         {
-            instance = new GameManager();
+
+            instance = FindObjectOfType<GameManager>();
+
+            if(instance == null)
+            {
+                GameObject obj = new GameObject();
+                obj.AddComponent<GameManager>();
+            }
         }
 
         return instance;
