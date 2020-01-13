@@ -49,20 +49,6 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Funcion que se ejecuta del update
-    /// </summary>
-    public void Update()
-    {
-
-        if (Input.GetButtonUp(ControllerAxis.Ok))
-        {
-            StartGame();
-        }
-
-    }
-
-
-    /// <summary>
     /// Inicia la escena principal
     /// </summary>
     public void StartGame()

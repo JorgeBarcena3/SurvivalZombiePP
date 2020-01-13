@@ -73,6 +73,7 @@ public class Living : MonoBehaviour
         switch (myKind)
         {
             case KindOfLiving.PLAYER:
+                GameManager.GetInstance().StartGame();
                 break;
             case KindOfLiving.ZOMBIE:
                 GetComponent<ZombieFollower>().SetInactive();
