@@ -194,7 +194,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (GetComponentInChildren<Weapons>()) 
         {
-            anim.SetTrigger("Shooting");
+            anim.SetBool("Shooting",true);
         }
             
     }
@@ -225,5 +225,5 @@ public class PlayerControls : MonoBehaviour
             anim.SetBool("Moving", true);
         }
     }
-    public void resetShootingWeapon() { GetComponentInChildren<Weapons>().firingFalse(); }
+    public void resetShootingWeapon() { GetComponentInChildren<Weapons>().firingFalse(); anim.SetBool("Shooting", false); }
 }
