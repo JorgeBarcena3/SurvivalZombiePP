@@ -11,12 +11,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Face_Police_Zombie_MAT
-    second: {fileID: 2100000, guid: c5166d43bf0779841811040d1827695b, type: 2}
+    second: {fileID: 2100000, guid: 7c6cba2db1f1731448f88ffa3223acc8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Police_Zombie_MAT
-    second: {fileID: 2100000, guid: c5166d43bf0779841811040d1827695b, type: 2}
+    second: {fileID: 2100000, guid: 7c6cba2db1f1731448f88ffa3223acc8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
