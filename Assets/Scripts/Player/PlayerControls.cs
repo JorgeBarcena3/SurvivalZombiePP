@@ -15,7 +15,7 @@ public static class ControllerAxis
     public static string Disparo = "Right Trigger";
     public static string Correr = "L3";
     public static string Apuntar = "Left Trigger";
-
+    public static string Ok = "Fire1";
 
 }
 
